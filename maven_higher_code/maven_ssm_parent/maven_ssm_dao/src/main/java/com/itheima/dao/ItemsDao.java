@@ -23,4 +23,10 @@ public interface ItemsDao {
      * @return
      */
     public List<Items> findAll();
+
+    /**
+     * 保存items对象
+     * @param items
+     */
+    public void saveItems(Items items);
 }
