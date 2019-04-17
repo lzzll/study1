@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- spring框架中的针对业务(service)层的核心配置-->
+    <!-- 一、配置组件扫描 -->
+    <context:component-scan base-package="com.itheima.service"></context:component-scan>
+
+    <!-- 二、配置service层中的事务属性 -->
+    <!-- 1.1 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 1.2 配置事务的切面类 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 增删改三项方法需要配置事务属性,所以将传播行为设置为默认的有事务支持,如果是查询操作,设置为只读属性 -->
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <!-- 对自定义的方法添加属性 -->
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 1.3 配置切面类 -->
+    <aop:config>
+        <!-- 切点表达式的提取 -->
+        <aop:pointcut id="pt1" expression="execution(* com.itheima.service.impl.*.*(..))"/>
+        <!-- 配置切面类的织入 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"></aop:advisor>
+    </aop:config>
+
+    <!-- service层的配置结束 -->
+
+</beans>
