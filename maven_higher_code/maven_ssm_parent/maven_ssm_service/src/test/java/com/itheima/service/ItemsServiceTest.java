@@ -40,6 +40,7 @@ public class ItemsServiceTest {
     public void testDao() {
         Items items = itemsDao.findByID(1);
 		int a = 10;
+        System.out.println(a);
         System.out.println(items);
     }
 
