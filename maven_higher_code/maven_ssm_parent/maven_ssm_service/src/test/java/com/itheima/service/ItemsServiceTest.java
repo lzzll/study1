@@ -39,6 +39,7 @@ public class ItemsServiceTest {
     @Test
     public void testDao() {
         Items items = itemsDao.findByID(1);
+		int a = 10;
         System.out.println(items);
     }
 
