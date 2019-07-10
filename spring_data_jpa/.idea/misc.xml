@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/jpa-day1/pom.xml" />
+        <option value="$PROJECT_DIR$/jpa-day2/pom.xml" />
+        <option value="$PROJECT_DIR$/jpa-day3-manytomany/pom.xml" />
+        <option value="$PROJECT_DIR$/jpa-day3-onetomany/pom.xml" />
+        <option value="$PROJECT_DIR$/jpa-day3-spec/pom.xml" />
+      </list>
+    </option>
+  </component>
+</project>
